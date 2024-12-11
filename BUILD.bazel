@@ -1,0 +1,8 @@
+filegroup(
+    name = "outer",
+    srcs = [
+        "baz.txt",
+        "foo.txt",
+    ],
+    visibility = ["//bar:__pkg__"],
+)

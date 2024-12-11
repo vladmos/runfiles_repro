@@ -1,0 +1,18 @@
+module(
+    name = "repro",
+    version = "0.0.0",
+)
+
+bazel_dep(name = "rules_go", version = "0.50.1", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "gazelle", version = "0.40.0", repo_name = "bazel_gazelle")
+
+go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.download(version = "1.20.3")
+
+go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+go_deps.module(
+    path = "golang.org/x/tools",
+    sum = "h1:zdAyfUGbYmuVokhzVmghFl2ZJh5QhcfebBgmVPFYA+8=",
+    version = "v0.15.0",
+)

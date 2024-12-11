@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test")
+
+filegroup(
+    name = "inner",
+    srcs = [
+        "bar.txt",
+        "foo.txt",
+    ],
+)
+
+go_test(
+    name = "repro_test",
+    size = "small",
+    srcs = ["test.go"],
+    data = [
+        ":inner",
+        "//:outer",
+    ],
+)
